@@ -22,7 +22,7 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -
 # Add conda to PATH
 ENV PATH="/opt/conda/bin:$PATH"
 
-COPY requirements.txt .
+COPY . .
 
 # (Recommended) Create a new conda environment and install requirements
 RUN conda create -n bitnet-cpp python=3.9 -y \

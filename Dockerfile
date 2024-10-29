@@ -42,6 +42,11 @@ COPY --from=build /opt/conda /opt/conda
 # Add conda to PATH
 ENV PATH="/opt/conda/bin:$PATH"
 
+RUN apt-get update && apt-get install -y \
+    cmake \
+    clang \
+    llvm \
+
 # Copy the entrypoint script into the container
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 

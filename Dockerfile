@@ -42,14 +42,14 @@ COPY --from=build /opt/conda /opt/conda
 # Add conda to PATH
 ENV PATH="/opt/conda/bin:$PATH"
 
-RUN conda activate bitnet-cpp \
-    && python setup_env.py -md models/Llama3-8B-1.58-100B-tokens -q i2_s \
-    && python setup_env.py -md models/bitnet_b1_58-large -q i2_s \
-    && python setup_env.py -md models/bitnet_b1_58-3B -q i2_s
+# Copy the entrypoint script into the container
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 
+# Make the entrypoint script executable
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
 
 # Copy the current directory contents into the container at /app
 COPY . .
 
-CMD ["python", "main.py"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

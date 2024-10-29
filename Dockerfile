@@ -38,8 +38,15 @@ COPY --from=build /opt/conda /opt/conda
 # Add conda to PATH
 ENV PATH="/opt/conda/bin:$PATH"
 
+RUN conda activate bitnet-cpp \
+    && python setup_env.py -md models/Llama3-8B-1.58-100B-tokens -q i2_s \
+    && python setup_env.py -md models/bitnet_b1_58-large -q i2_s \
+    && python setup_env.py -md models/bitnet_b1_58-3B -q i2_s
+
+
+
 # Copy the current directory contents into the container at /app
 COPY . .
 
 # Command to run your application
-CMD ["conda", "run", "-n", "bitnet-cpp", "python", "main.py"]
+CMD ["python", "main.py"]

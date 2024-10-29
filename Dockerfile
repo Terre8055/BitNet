@@ -24,6 +24,8 @@ ENV PATH="/opt/conda/bin:$PATH"
 
 COPY . .
 
+RUN ls -al 
+
 # (Recommended) Create a new conda environment and install requirements
 RUN conda create -n bitnet-cpp python=3.9 -y \
     && /opt/conda/bin/conda run -n bitnet-cpp pip install -r requirements.txt

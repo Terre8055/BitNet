@@ -6,6 +6,7 @@ WORKDIR /app
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
+    curl \
     cmake \
     clang \
     llvm \
@@ -43,6 +44,7 @@ COPY --from=build /opt/conda /opt/conda
 ENV PATH="/opt/conda/bin:$PATH"
 
 RUN apt-get update && apt-get install -y \
+    curl \
     cmake \
     clang \
     llvm 

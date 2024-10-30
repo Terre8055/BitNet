@@ -21,7 +21,7 @@ env:
 
 jobs:
   build-push-and-tag:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     outputs:
       new_version: ${{ steps.versioning.outputs.new_version }}
     steps:
@@ -103,12 +103,12 @@ jobs:
       uses: actions/cache@v3
       with:
         path: /tmp/.buildx-cache
-        key: ${{ runner.os }}-buildx-${{ github.sha }}
+        key: ${{ runner.os }}-buildx-${{ github.ref }}
         restore-keys: |
-            ${{ runner.os }}-buildx-
+            ${{ runner.os }}-buildx-${{ github.ref }}
+            ${{ runner.os }}-buildx
 
 
-              
     - name: Build and push image to ECR
       id: build-image
       uses: docker/build-push-action@v6

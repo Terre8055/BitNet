@@ -57,4 +57,5 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 # Copy the current directory contents into the container at /app
 COPY . .
 
+
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

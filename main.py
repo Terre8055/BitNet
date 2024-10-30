@@ -25,9 +25,10 @@ async def predict(
     temperature: float = Form(...)
 ):
     try:
+        model_file = f'models/{model}/ggml-model-i2_s.gguf' if model == 'i2' else f'models/{model}/ggml-model-tl2.gguf'
         command = [
             'python', 'run_inference.py',
-            '-m', f'models/{model}/ggml-model-i2_s.gguf',
+            '-m', model_file,
             '-p', prompt,
             '-n', str(tokens),
             '-temp', str(temperature)

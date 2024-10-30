@@ -179,22 +179,22 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
           instance-ids: ${{ steps.get_instances.outputs.instance_ids }}
-          working-directory: /home/ec2-user
+          working-directory: /home/ubuntu
           comment: "Running docker commands"
           command: |
             sudo sh -c "set -e && \
             export PATH=\$PATH:/usr/local/bin && \
-            cd /home/ec2-user && \
+            cd /home/ubuntu && \
             echo 'Downloading docker-compose.yml from S3...' && \
             aws s3 cp s3://bitnet-model-playground/docker-compose.yml . && \
             echo 'Stopping existing Docker containers...' && \
-            /usr/local/bin/docker-compose -f /home/ec2-user/docker-compose.yml down && \
+            /usr/local/bin/docker-compose -f /home/ubuntu/docker-compose.yml down && \
             echo 'Logging in to Amazon ECR...' && \
             aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 330858616968.dkr.ecr.eu-west-1.amazonaws.com && \
             echo 'Pulling latest Docker images...' && \
-            /usr/local/bin/docker-compose -f /home/ec2-user/docker-compose.yml pull && \
+            /usr/local/bin/docker-compose -f /home/ubuntu/docker-compose.yml pull && \
             echo 'Starting Docker services with Docker Compose...' && \
-            /usr/local/bin/docker-compose -f /home/ec2-user/docker-compose.yml up -d"
+            /usr/local/bin/docker-compose -f /home/ubuntu/docker-compose.yml up -d"
 
             
 

@@ -108,6 +108,7 @@ jobs:
             ${{ runner.os }}-buildx-
 
 
+              
     - name: Build and push image to ECR
       id: build-image
       uses: docker/build-push-action@v6
